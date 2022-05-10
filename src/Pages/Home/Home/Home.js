@@ -1,9 +1,20 @@
 import React from 'react';
+import Banner from '../Banner/Banner';
+import ContactForm from '../ContactForm/ContactForm';
+import Info from '../Info/Info';
+import MakeApoinment from '../MakeApoinment/MakeApoinment';
+import Services from '../Services/Services';
+import Testimonials from '../Testimonials/Testimonials';
 
 const Home = () => {
     return (
-        <div>
-            <h2>This is Home</h2>
+        <div >
+            <Banner></Banner>
+            <Info></Info>
+            <Services></Services>
+            <MakeApoinment></MakeApoinment>
+            <Testimonials></Testimonials>
+            <ContactForm></ContactForm>
         </div>
     );
 };
