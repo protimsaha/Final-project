@@ -4,7 +4,7 @@ import Button from '../../../Shared/Button/Button';
 
 const ServiceHero = () => {
     return (
-        <div class="hero  p-6 m-6">
+        <div class="hero ">
             <div class="hero-content flex-col lg:flex-row">
                 <img src={service} class="max-w-sm rounded-lg shadow-2xl" />
                 <div className='mx-10'>
