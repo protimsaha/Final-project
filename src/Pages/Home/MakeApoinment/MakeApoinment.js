@@ -14,7 +14,7 @@ const MakeApoinment = () => {
                     <p className='text-xl text-primary'>Apoinment</p>
                     <h3 className='text-3xl text-white'>Make an apoinment today!</h3>
                     <p className='text-white my-4'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsa magnam consequuntur ex. Molestias doloremque hic odit obcaecati, exercitationem rem iure ratione officia fuga beatae impedit eligendi vitae esse perspiciatis iste temporibus optio aspernatur itaque, reiciendis accusantium voluptas numquam amet?</p>
-                    <Button></Button>
+                    <Button>Get Apoinment</Button>
                 </div>
             </div>
         </section>
