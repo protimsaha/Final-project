@@ -1,5 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
+import axios from 'axios';
 
 
 const BookingModal = ({ treatment, date, setTreatment }) => {
@@ -8,8 +9,18 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
     const handleBooking = event => {
         event.preventDefault()
         const slot = event.target.slot.value
-        console.log(slot)
+        const name = event.target.name.value
+        const email = event.target.email.value
+        const phone = event.target.phone.value
+        const data = { date: date, slot: slot, name: name, email: email, phone: phone }
+
+        console.log(data)
+        axios.post('http://localhost:5000/bookings', { data })
+            .then(res => console.log(res))
+
+
         setTreatment(null)
+
     }
 
     return (
