@@ -13,6 +13,9 @@ const Navbar = () => {
         <li><Link to="/review">Review</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/about">About</Link></li>
+        {
+            user && <li><Link to="/dashboard">Dashboard</Link></li>
+        }
         {user ? <button onClick={() => signOut(auth)} className='btn btn-ghost'>Sign Out</button> :
             <li><Link to="/login">Login</Link></li>}
     </>
@@ -33,6 +36,9 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal p-0">
                     {menuItems}
                 </ul>
+            </div>
+            <div className="navbar-end">
+                <label for="my-drawer-2" class="btn btn-outline drawer-button lg:hidden">Dashboard</label>
             </div>
         </div>
     );

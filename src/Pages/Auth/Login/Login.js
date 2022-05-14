@@ -1,14 +1,18 @@
-import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../../Shared/Loading';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const navigate = useNavigate()
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
     const [signInWithGoogle, googleUser, googleLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [email, setEmail] = useState('')
 
     const [
         signInWithEmailAndPassword,
@@ -17,9 +21,14 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    if (googleUser || user) {
-        navigate('/appointment')
-    }
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+
+    useEffect(() => {
+        if (googleUser || user) {
+            navigate(from, { replace: true });
+        }
+
+    }, [user, googleUser, navigate, from])
     if (loading || googleLoading) {
         return <Loading></Loading>
     }
@@ -29,10 +38,9 @@ const Login = () => {
         signInError = <p>{error?.message || gError?.message}</p>
     }
 
-
     const onSubmit = data => {
-        console.log(data)
         signInWithEmailAndPassword(data.email, data.password)
+        setEmail(data.email)
     };
 
     return (
@@ -86,6 +94,15 @@ const Login = () => {
                                     }
                                 })}
                             />
+                            <label className='label'>
+                                <span className="label-text"> Forgote password?
+                                </span>
+                                <p role='button' className='text-secondary ml-2' onClick={async () => {
+                                    await sendPasswordResetEmail(email)
+                                    toast('Password Reset email sent')
+                                }}>Reset your password</p>
+                            </label>
+
                             <label className="label">
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
