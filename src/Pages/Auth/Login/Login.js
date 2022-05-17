@@ -5,6 +5,7 @@ import auth from '../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../../Shared/Loading';
 import { toast } from 'react-toastify';
+import useToken from '../../../Hooks/useToken';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -23,12 +24,14 @@ const Login = () => {
 
     const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
 
+    const [token] = useToken(googleUser || user)
+
     useEffect(() => {
-        if (googleUser || user) {
+        if (token) {
             navigate(from, { replace: true });
         }
 
-    }, [user, googleUser, navigate, from])
+    }, [user, googleUser, navigate, from, token])
     if (loading || googleLoading) {
         return <Loading></Loading>
     }

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import About from './Pages/Home/About/About';
 import Home from './Pages/Home/Home/Home';
@@ -9,9 +9,11 @@ import Login from './Pages/Auth/Login/Login';
 import Apoinment from './Pages/Apoinment/Apoinment';
 import Signup from './Pages/Auth/Signup';
 import RequireAuth from './Pages/Auth/RequireAuth';
-import Dashboard from '../src/Pages/Home/Dasboard'
-import MyAppoinment from './Pages/Home/MyAppoinment';
-import MyReview from './Pages/Home/MyReview';
+import Dashboard from '../src/Pages/Home/Dashboard/Dasboard'
+import MyAppoinment from './Pages/Home/Dashboard/MyAppoinment';
+import MyReview from './Pages/Home/Dashboard/MyReview';
+import Users from './Pages/Home/Dashboard/Users';
+import RequireAdmin from './Pages/Auth/RequireAdmin';
 
 function App() {
   return (
@@ -29,8 +31,8 @@ function App() {
         <Route path="dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} >
           <Route index element={<MyAppoinment></MyAppoinment>}></Route>
           <Route path="myreview" element={<MyReview></MyReview>}></Route>
+          <Route path="users" element={<RequireAdmin><Users></Users></RequireAdmin>}></Route>
         </Route>
-
       </Routes>
       <ToastContainer></ToastContainer>
     </div>
